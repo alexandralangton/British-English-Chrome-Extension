@@ -1,0 +1,33 @@
+#options-page {
+    display: flex;
+    justify-content: center;
+}
+
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+p, span, button {
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+
+p {
+    margin-bottom: 2rem;
+}
+
+.mode {
+    width: 16rem;
+    margin: 0rem 0.5rem;
+}
+
+button {
+    color: white;
+    background-color: darkred;
+    margin: 1rem;
+}
