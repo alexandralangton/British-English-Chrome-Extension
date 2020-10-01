@@ -1,0 +1,28 @@
+{
+    "name": "The British Are Coming",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "Translate websites from American to British English",
+    "permissions": ["activeTab", "declarativeContent", "storage", "http://*/*", "https://*/*/"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "content_scripts": [{
+      "js": ["content.js"],
+      "matches": [
+        "<all_urls>"
+    ]
+}],
+    "options_page": "options.html",
+    "browser_action": {
+      "default_title": "Translates websites from American to British English",
+      "default_popup": "popup.html",
+      "default_icon": {
+        "128": "images/flag.png"
+      }
+    },
+    "icons": {
+      "128": "images/flag.png"
+    }
+  }
