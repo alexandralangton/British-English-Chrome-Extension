@@ -1,7 +1,7 @@
 console.log('you got me!');
 
 chrome.runtime.onMessage.addListener((msg, sender, sendRes) => {
-	if (msg.txt === 'kittens') {
+	if (msg.txt === 'serious') {
 		let elements = document.getElementsByTagName('p');
 		console.log('elements: ', elements);
 
