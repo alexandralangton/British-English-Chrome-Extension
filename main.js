@@ -3,7 +3,7 @@ import { dictionary } from '/dictionary.js';
 // Remove all punctuation, plurals and capitals before looking up the word in the dictionary
 function simplifyBefore(word) {
 	word = word.toLowerCase();
-	if ('.,"\'?!)}]'.includes(word[word.length - 1])) {
+	if (':.,"\'?!)}]'.includes(word[word.length - 1])) {
 		word = word.slice(0, -1);
 	}
 	if ('.,"\'{[(#'.includes(word[0])) {
@@ -12,6 +12,7 @@ function simplifyBefore(word) {
 	if (word.endsWith('s')) {
 		word = word.slice(0, -1);
 	}
+	// console.log('word: ', word);
 	return word;
 }
 
@@ -41,10 +42,13 @@ function matchCase(usWord, ukWord) {
 function translate(word, wordToTest) {
 	let translatedWord = dictionary[wordToTest];
 	translatedWord = matchCase(word, translatedWord);
-	if ('.,"\'?!)}]'.includes(word[word.length - 1])) {
+	if ('-.,:"\'?!)}]'.includes(word[word.length - 1])) {
+		if (word.slice(0, -1).endsWith('s')) {
+			translatedWord = translatedWord + 's';
+		}
 		translatedWord = translatedWord + word[word.length - 1];
 	}
-	if ('.,"\'{[(#'.includes(word[0])) {
+	if ('-.,"\'{[(#'.includes(word[0])) {
 		translatedWord = word[0] + translatedWord;
 	}
 	if (word.endsWith('s')) {
