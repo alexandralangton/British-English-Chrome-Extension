@@ -1,12 +1,14 @@
-console.log('you got me!');
+const script = document.createElement('script');
+script.setAttribute('type', 'module');
+script.setAttribute('src', chrome.extension.getURL('main.js'));
+const head =
+	document.head ||
+	document.getElementsByTagName('head')[0] ||
+	document.documentElement;
+head.insertBefore(script, head.lastChild);
 
 chrome.runtime.onMessage.addListener((msg, sender, sendRes) => {
 	if (msg.txt === 'serious') {
-		let elements = document.getElementsByTagName('p');
-		console.log('elements: ', elements);
-
-		for (let i = 0; i < elements.length; i++) {
-			elements[i].innerText = 'kittens!!!';
-		}
+		window.postMessage('serious');
 	}
 });

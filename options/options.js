@@ -1,12 +1,10 @@
 let serious = document.getElementById('serious');
-let takeover = document.getElementById('takeover');
 
 serious.addEventListener('click', () => {
 	chrome.storage.sync.set({ mode: 'serious' }),
-		console.log('serious was clicked!');
 });
 
+let takeover = document.getElementById('takeover');
 takeover.addEventListener('click', () => {
 	chrome.storage.sync.set({ mode: 'takeover' }),
-		console.log('takeover was clicked!');
 });
