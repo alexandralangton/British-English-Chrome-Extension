@@ -20,6 +20,7 @@ export const dictionary = {
 	popsicle: 'ice lolly',
 	fava: 'broad',
 	'whole-wheat': 'wholemeal',
+	broil: 'grill',
 	capitalize: 'capitalise',
 	appall: 'appal',
 	distill: 'distil',
