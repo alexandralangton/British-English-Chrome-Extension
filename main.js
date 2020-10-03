@@ -60,6 +60,7 @@ function inlineAdder(word, translatedWord) {
 		let startIdx = word.indexOf('<');
 		endInline = word.slice(startIdx);
 	}
+	console.log(frontInline + translatedWord + endInline);
 	return frontInline + translatedWord + endInline;
 }
 

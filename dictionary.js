@@ -8,8 +8,8 @@ export const dictionary = {
 	cilantro: 'coriander',
 	pepitas: 'sunflower seeds',
 	scallion: 'spring onion',
-	flavor: 'flavour',
 	savory: 'savoury',
+	beet: 'beetroot',
 	beets: 'beetroot',
 	chips: 'crisps',
 	silverware: 'cutlery',
@@ -19,9 +19,10 @@ export const dictionary = {
 	oatmeal: 'porridge',
 	popsicle: 'ice lolly',
 	fava: 'broad',
+	frosting: 'icing',
+	skillet: 'frying pan',
 	'whole-wheat': 'wholemeal',
 	broil: 'grill',
-	capitalize: 'capitalise',
 	appall: 'appal',
 	distill: 'distil',
 	enroll: 'enrol',
@@ -32,7 +33,6 @@ export const dictionary = {
 	fulfillment: 'fulfilment',
 	installment: 'instalment',
 	instillment: 'instilment',
-	humor: 'humour',
 	airplane: 'aeroplane',
 	aluminum: 'aluminium',
 	candidacy: 'candidature',
@@ -51,10 +51,14 @@ export const dictionary = {
 	tidbit: 'titbit',
 	jewellry: 'jewellery',
 	color: 'colour',
+	humor: 'humour',
+	labor: 'labour',
 	behavior: 'behaviour',
+	flavor: 'flavour',
 	theater: 'theatre',
+	liter: 'litre',
 	meter: 'metre',
-	organize: 'organise',
+	center: 'centre',
 	traveled: 'travelled',
 	apartment: 'flat',
 	vacation: 'holiday',
@@ -80,7 +84,6 @@ export const dictionary = {
 	elevator: 'lift',
 	odor: 'odour',
 	pajamas: 'pyjamas',
-	apologize: 'apologise',
 	diaper: 'nappy',
 	pacifier: 'dummy',
 	flashlight: 'torch',
@@ -88,6 +91,8 @@ export const dictionary = {
 	trash: 'rubbish',
 	neighbor: 'neighbour',
 	rumor: 'rumour',
+	ardor: 'ardour',
+	armor: 'armour',
 	counterclockwise: 'counterclockwise',
 	'tic-tac-toe': 'noughts and crosses',
 	clothespin: 'peg',
@@ -103,6 +108,53 @@ export const dictionary = {
 	mold: 'mould',
 	licorice: 'liquorice',
 	cozy: 'cosy',
+	capitalize: 'capitalise',
+	realize: 'realise',
+	analyze: 'analyse',
+	catalyze: 'catalyse',
+	breathalyze: 'breathalyse',
+	electrolyze: 'electrolyse',
+	paralyze: 'paralyse',
+	pyschoanalyze: 'pyschoanalyse',
+	finalize: 'finalise',
+	organize: 'organise',
+	apologize: 'apologise',
+	recognize: 'recognise',
+	leukemia: 'leukaemia',
+	maneuver: 'manoeuvre',
+	estrogen: 'oestrogen',
+	pediatric: 'paediatric',
+	defense: 'defence',
+	license: 'license',
+	offense: 'offence',
+	pretense: 'pretence',
+	analog: 'analogue',
+	catalog: 'catalogue',
+	dialog: 'dialogue',
+	acknowledgment: 'acknowledgement',
+	judgment: 'judgement',
+	aging: 'ageing',
+	brooch: 'pin',
+	casket: 'coffin',
+	realtor: 'estate agent',
+	purse: 'handbag',
+	washroom: 'lavatory',
+	railroad: 'railway',
+	faucet: 'tap',
+	gridlock: 'traffic jam',
+	streetcar: 'tram',
+	cart: 'trolley',
+	pants: 'trousers',
+	mortician: 'undertaker',
+	porch: 'veranda',
+	undershirt: 'vest',
+	zipper: 'zip',
+	anesthetic: 'anaesthetic',
+	appall: 'appal',
+	balk: 'baulk',
+	belabor: 'belabour',
+	swimsuit: 'swimming costume',
+	vacuum: 'hoover',
 };
 
 // Plurals
@@ -125,6 +177,10 @@ export const dictionary = {
 // mobile phone / cell phone
 // trash can
 // parking lot
+// driver's license vs driving licence
+// bathing suit / swimming costume
+// scotch tape / sellotape
+// band aid / plaster
 
 // weird cases
 // can (iso tin)
@@ -132,3 +188,4 @@ export const dictionary = {
 // fall / autumn
 // program / programme
 // gas / petrol
+// buggy / pram
