@@ -9,6 +9,7 @@
       "persistent": false
     },
     "content_scripts": [{
+      "css": ["explainer.css"],
       "js": ["content.js"],
       "matches": [
         "<all_urls>"

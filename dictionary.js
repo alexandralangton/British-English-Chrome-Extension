@@ -2,6 +2,7 @@ export const dictionary = {
 	gray: 'grey',
 	favorite: 'favourite',
 	appetizer: 'appetiser',
+	appetizing: 'appetising',
 	chili: 'chilli',
 	eggplant: 'aubergine',
 	zucchini: 'courgette',
@@ -58,19 +59,31 @@ export const dictionary = {
 	rumor: 'rumour',
 	ardor: 'ardour',
 	armor: 'armour',
+	glamor: 'glamour',
 	candor: 'candour',
+	endeavor: 'endeavour',
 	behavior: 'behaviour',
 	flavor: 'flavour',
+	flavorful: 'flavourful',
+	flavorless: 'flavorless',
+	flavoring: 'flavouring',
+	flavorsome: 'flavoursome',
+	fervor: 'fervour',
 	neighbor: 'neighbour',
 	harbor: 'harbour',
 	belabor: 'belabour',
+	favor: 'favour',
+	favorable: 'favourable',
+	favored: 'favoured',
 	theater: 'theatre',
 	liter: 'litre',
 	meter: 'metre',
+	fiber: 'fibre',
 	mililiter: 'mililitre',
 	centimeter: 'centimetre',
 	kilometer: 'kilmetre',
 	center: 'centre',
+	epicenter: 'epicentre',
 	apartment: 'flat',
 	vacation: 'holiday',
 	movie: 'film',
@@ -98,7 +111,7 @@ export const dictionary = {
 	flashlight: 'torch',
 	garbage: 'rubbish',
 	trash: 'rubbish',
-	counterclockwise: 'counterclockwise',
+	counterclockwise: 'anti-clockwise',
 	'tic-tac-toe': 'noughts and crosses',
 	clothespin: 'peg',
 	enamored: 'enamoured',
@@ -124,6 +137,8 @@ export const dictionary = {
 	organize: 'organise',
 	apologize: 'apologise',
 	recognize: 'recognise',
+	optimize: 'optimise',
+	optimization: 'optimization',
 	leukemia: 'leukaemia',
 	maneuver: 'manoeuvre',
 	estrogen: 'oestrogen',
@@ -171,10 +186,15 @@ export const dictionary = {
 	dialed: 'dialled',
 	dialing: 'dialling',
 	dueling: 'duelling',
+	dueled: 'duelling',
+	fueled: 'fuelled',
+	fueling: 'fuelling',
 	labeled: 'labelled',
 	labeling: 'labelling',
 	marveled: 'mavelled',
 	marveling: 'marvelling',
+	enameled: 'enamelled',
+	enamelling: 'enamelling',
 	traveled: 'travelled',
 	traveling: 'travelling',
 	traveler: 'traveller',
@@ -184,6 +204,8 @@ export const dictionary = {
 	worshiper: 'worshipper',
 	worshiped: 'worshipped',
 	worshiping: 'worshipping',
+	flutist: 'flautist',
+	flier: 'flyer',
 };
 
 export const firstWordDouble = {
@@ -238,6 +260,15 @@ export const fullDoublePhrase = {
 	'band aid': 'plaster',
 	'tennis shoes': 'trainers',
 	'whole wheat': 'wholemeal',
+};
+
+export const popupText = {
+	cookingF: `Some common cooking conversions from Fahrenheit to Celsius:
+	<br>250°F = 130°C
+	<br>300°F = 150°C
+	<br>350°F = 180°C
+	<br>400°F = 200°C
+	<br>450°F = 230°C`,
 };
 
 // weird cases

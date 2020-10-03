@@ -1,4 +1,9 @@
-import { dictionary, firstWordDouble, fullDoublePhrase } from '/dictionary.js';
+import {
+	dictionary,
+	firstWordDouble,
+	fullDoublePhrase,
+	popupText,
+} from '/dictionary.js';
 
 function inlineRemover(word) {
 	word = word.replace(/<\w+>/g, '');
@@ -11,7 +16,7 @@ function simplifyBefore(word) {
 	word = word.toLowerCase();
 	word = inlineRemover(word);
 
-	if (':;.,"\'?!)}]<'.includes(word[word.length - 1])) {
+	if (':;.,"\'?!°)}]<'.includes(word[word.length - 1])) {
 		word = word.slice(0, -1);
 	}
 	if ('.,"\'{[(#>'.includes(word[0])) {
@@ -64,7 +69,7 @@ function inlineAdder(word, translatedWord) {
 }
 
 function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
-	if ('-.,:;"\'?!)}]<'.includes(word[word.length - 1])) {
+	if ('-.,:;"\'?!)}]°<'.includes(word[word.length - 1])) {
 		if (word.slice(0, -1).endsWith('s')) {
 			translatedWord = translatedWord + 's';
 		}
@@ -79,7 +84,7 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 	if (word.endsWith('zed') || twoToOnePlural === 'zed') {
 		translatedWord = translatedWord + 'd';
 	}
-	return translatedWord;
+	return translatedWord.trim();
 }
 
 // Get the word out of the dictionary & adjust the format to match the original word (caps & punctuation)
@@ -98,6 +103,7 @@ function translate(word, wordToTest) {
 }
 
 let skipWord = false;
+let skipTwo = false;
 
 function translateTwoWordPhrase(wordOne, editedWordOne, wordTwo) {
 	if (!wordTwo) return null;
@@ -141,19 +147,62 @@ function translateTwoWordPhrase(wordOne, editedWordOne, wordTwo) {
 	}
 }
 
+let popupIdNo = 1;
+
+export function conversions(num, nextWord, nextNextWord) {
+	if (!nextWord || !nextNextWord) return null;
+
+	let checkNextWord = simplifyBefore(nextWord).toLowerCase();
+	let checkNextNextWord = simplifyBefore(nextNextWord).toLowerCase();
+
+	if (
+		checkNextWord === 'f' ||
+		(checkNextWord === 'degree' && checkNextNextWord === 'fahrenheit') ||
+		(checkNextWord === 'degree' && checkNextNextWord === 'f')
+	) {
+		console.log('DING DING DING');
+		if (checkNextNextWord === 'f' || checkNextNextWord === 'fahrenheit') {
+			skipTwo = true;
+		}
+		skipWord = true;
+		++popupIdNo;
+		return `<div class="popup" onclick="let popup = document.getElementById('myPopup${
+			popupIdNo - 1
+		}');
+        popup.classList.toggle('show');"> ${num} ${nextWord} ${nextNextWord}
+        <span class="popuptext" id="myPopup${popupIdNo - 1}">${
+			popupText.cookingF
+		}</span>
+      </div>`;
+	}
+}
+
 // Check all of a particular tag type's innerText for words to translate and replace them if needed
-function findWordsToTranslate(elements) {
+export function findWordsToTranslate(elements) {
 	for (let i = 0; i < elements.length; i++) {
 		elements[i].innerHTML = elements[i].innerHTML
 			.split(' ')
 			.map((word, idx, arr) => {
-				// if a two word phrase has been found previously, reset 'skipWord' and return an empty string
+				// if a two/three word phrase has been found previously, reset 'skipWord' and return an empty string
+				if (skipTwo) {
+					skipTwo = false;
+					return '';
+				}
 				if (skipWord) {
 					skipWord = false;
 					return '';
 				}
+				// check for potential conversions / pop ups
 				// clean up the word before testing
 				let wordToTest = simplifyBefore(word);
+				if (!isNaN(parseInt(wordToTest))) {
+					// console.log('word: ', word);
+					// console.log('arr[idx]: ', arr[idx]);
+					// console.log('arr[idx + 1]: ', arr[idx + 1]);
+					// console.log('arr[idx + 2]: ', arr[idx + 2]);
+					let popup = conversions(word, arr[idx + 1], arr[idx + 2]);
+					if (popup) return popup;
+				}
 				// check if this is part of a two word phrase
 				if (firstWordDouble[wordToTest]) {
 					let twoWordPhrase = translateTwoWordPhrase(
