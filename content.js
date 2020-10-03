@@ -10,5 +10,7 @@ head.insertBefore(script, head.lastChild);
 chrome.runtime.onMessage.addListener((msg, sender, sendRes) => {
 	if (msg.txt === 'serious') {
 		window.postMessage('serious');
+	} else if (msg.txt === 'silly') {
+		window.postMessage('silly');
 	}
 });

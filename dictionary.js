@@ -50,21 +50,31 @@ export const dictionary = {
 	specialty: 'speciality',
 	tidbit: 'titbit',
 	jewellry: 'jewellery',
+	jeweler: 'jeweller',
 	color: 'colour',
 	humor: 'humour',
 	labor: 'labour',
+	odor: 'odour',
+	rumor: 'rumour',
+	ardor: 'ardour',
+	armor: 'armour',
+	candor: 'candour',
 	behavior: 'behaviour',
 	flavor: 'flavour',
+	neighbor: 'neighbour',
+	harbor: 'harbour',
+	belabor: 'belabour',
 	theater: 'theatre',
 	liter: 'litre',
 	meter: 'metre',
+	mililiter: 'mililitre',
+	centimeter: 'centimetre',
+	kilometer: 'kilmetre',
 	center: 'centre',
-	traveled: 'travelled',
 	apartment: 'flat',
 	vacation: 'holiday',
 	movie: 'film',
 	sneakers: 'trainers',
-	'tennis shoes': 'trainers',
 	sweater: 'jumper',
 	mail: 'post',
 	mailbox: 'postbox',
@@ -82,21 +92,15 @@ export const dictionary = {
 	takeout: 'takeaway',
 	truck: 'lorry',
 	elevator: 'lift',
-	odor: 'odour',
 	pajamas: 'pyjamas',
 	diaper: 'nappy',
 	pacifier: 'dummy',
 	flashlight: 'torch',
 	garbage: 'rubbish',
 	trash: 'rubbish',
-	neighbor: 'neighbour',
-	rumor: 'rumour',
-	ardor: 'ardour',
-	armor: 'armour',
 	counterclockwise: 'counterclockwise',
 	'tic-tac-toe': 'noughts and crosses',
 	clothespin: 'peg',
-	harbor: 'harbour',
 	enamored: 'enamoured',
 	mustache: 'mustache',
 	mom: 'mum',
@@ -152,35 +156,89 @@ export const dictionary = {
 	anesthetic: 'anaesthetic',
 	appall: 'appal',
 	balk: 'baulk',
-	belabor: 'belabour',
 	swimsuit: 'swimming costume',
 	vacuum: 'hoover',
+	burglarize: 'burgle',
+	karat: 'carat',
+	checkers: 'draughts',
+	crueler: 'crueller',
+	cruelest: 'cruellest',
+	diarrhea: 'diarrhoea',
+	disheveled: 'dishevelled',
+	dollhouse: "doll's house",
+	canceled: 'cancelling',
+	canceling: 'cancelling',
+	dialed: 'dialled',
+	dialing: 'dialling',
+	dueling: 'duelling',
+	labeled: 'labelled',
+	labeling: 'labelling',
+	marveled: 'mavelled',
+	marveling: 'marvelling',
+	traveled: 'travelled',
+	traveling: 'travelling',
+	traveler: 'traveller',
+	kidnaped: 'kidnapped',
+	kidnaping: 'kidnapping',
+	kidnaper: 'kidnapper',
+	worshiper: 'worshipper',
+	worshiped: 'worshipped',
+	worshiping: 'worshipping',
 };
 
-// Plurals
+export const firstWordDouble = {
+	bell: true,
+	goat: true,
+	cotton: true,
+	shredded: true,
+	"confectioner's": true,
+	ground: true,
+	string: true,
+	grilled: true,
+	graham: true,
+	'self-rising': true,
+	fish: true,
+	pie: true,
+	cream: true,
+	baked: true,
+	cell: true,
+	trash: true,
+	parking: true,
+	"driver's": true,
+	bathing: true,
+	scotch: true,
+	band: true,
+	tennis: true,
+	whole: true,
+};
 
-// bell pepper
-// goat cheese
-// cotton candy
-// shredded coconut
-// icing sugar
-// ground meat
-// string beans
-// grilled cheese
-// graham cracker vs digestive
-// self-rising flour
-// fish stick
-// confectioner's sugar
-// pie case
-// cream puff (profiterole)
-// baked potato (jacket)
-// mobile phone / cell phone
-// trash can
-// parking lot
-// driver's license vs driving licence
-// bathing suit / swimming costume
-// scotch tape / sellotape
-// band aid / plaster
+export const fullDoublePhrase = {
+	'bell pepper': 'pepper',
+	'goat cheese': "goat's cheese",
+	'cotton candy': 'candyfloss',
+	'shredded coconut': 'dessicated coconut',
+	'ground meat': 'minced meat',
+	'string beans': 'green beans',
+	'grilled cheese': 'cheese toastie',
+	'graham cracker': 'digestive biscuit',
+	'self-rising flour': 'self-raising flour',
+	'fish stick': 'fish finger',
+	'candy floss': 'candyfloss',
+	'candy cane': 'candy cane',
+	"confectioner's sugar": 'icing sugar',
+	'pie case': 'pie crust',
+	'cream puff': 'profiterole',
+	'baked potato': 'jacket potato',
+	'cell phone': 'mobile phone',
+	'trash can': 'rubbish bin',
+	'parking lot': 'car park',
+	"driver's license": 'driving licence',
+	'bathing suit': 'swimming costume',
+	'scotch tape': 'sellotape',
+	'band aid': 'plaster',
+	'tennis shoes': 'trainers',
+	'whole wheat': 'wholemeal',
+};
 
 // weird cases
 // can (iso tin)
@@ -189,3 +247,5 @@ export const dictionary = {
 // program / programme
 // gas / petrol
 // buggy / pram
+// go to the movies
+// maize? do people use maize?
