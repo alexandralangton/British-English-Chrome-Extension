@@ -40,7 +40,6 @@ export const dictionary = {
 	candidacy: 'candidature',
 	doodad: 'doodah',
 	edgewise: 'edgeways',
-	elasticized: 'elasticised',
 	expiration: 'expiry',
 	furor: 'furore',
 	'hodge-podge': 'hotch-potch',
@@ -62,6 +61,8 @@ export const dictionary = {
 	armor: 'armour',
 	glamor: 'glamour',
 	candor: 'candour',
+	honor: 'honour',
+	honorable: 'honourable',
 	endeavor: 'endeavour',
 	behavior: 'behaviour',
 	flavor: 'flavour',
@@ -128,6 +129,12 @@ export const dictionary = {
 	cozy: 'cosy',
 	capitalize: 'capitalise',
 	realize: 'realise',
+	hospitalize: 'hospitalize',
+	hypothesize: 'hypothesise',
+	elasticize: 'elasticise',
+	authorize: 'authorise',
+	legalize: 'legalise',
+	civilize: 'civilise',
 	analyze: 'analyse',
 	catalyze: 'catalyse',
 	breathalyze: 'breathalyse',
@@ -138,8 +145,13 @@ export const dictionary = {
 	organize: 'organise',
 	apologize: 'apologise',
 	recognize: 'recognise',
+	baptize: 'baptise',
 	optimize: 'optimise',
-	optimization: 'optimization',
+	criticize: 'criticise',
+	hypnotize: 'hypnotise',
+	emphasize: 'emphasise',
+	mobilize: 'mobilise',
+	optimization: 'optimisation',
 	leukemia: 'leukaemia',
 	maneuver: 'manoeuvre',
 	estrogen: 'oestrogen',
@@ -207,6 +219,7 @@ export const dictionary = {
 	worshiping: 'worshipping',
 	flutist: 'flautist',
 	flier: 'flyer',
+	healthful: 'healthy',
 };
 
 export const firstWordDouble = {
@@ -233,12 +246,16 @@ export const firstWordDouble = {
 	band: true,
 	tennis: true,
 	whole: true,
+	can: true,
+	// gas: true,
 };
 
 export const fullDoublePhrase = {
+	// 'gas station': 'petrol station',
 	'bell pepper': 'pepper',
 	'goat cheese': "goat's cheese",
 	'cotton candy': 'candyfloss',
+	'can of': 'tin of',
 	'shredded coconut': 'dessicated coconut',
 	'ground meat': 'minced meat',
 	'string beans': 'green beans',
@@ -286,6 +303,10 @@ export const popupText = {
 	<br>10°F = -12°C
 	<br>0°F = -18°C`,
 	cupText: `One cup is approximately 240ml. As cups are volume-based measurements, they cannot be converted to grams. For example, a cup of flour is approximately 140g, whereas a cup of sugar is approximately 200g.`,
+};
+
+export const sillyMode = {
+	coffee: 'tea',
 };
 
 // weird cases

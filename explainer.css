@@ -1,4 +1,3 @@
-/* Popup container */
 .popup {
     position: relative;
     display: inline-block;
@@ -7,7 +6,6 @@
     text-decoration: underline;
   }
 
-  /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: hidden;
     width: 300px;
@@ -23,7 +21,6 @@
     margin-left: -80px;
   }
 
-  /* Popup arrow */
   .popup .popuptext::after {
     content: "";
     position: absolute;
@@ -35,7 +32,6 @@
     border-color: #555 transparent transparent transparent;
   }
 
-  /* Toggle this class when clicking on the popup container (hide and show the popup) */
   .popup .show {
     visibility: visible;
     animation: fadeIn 1s

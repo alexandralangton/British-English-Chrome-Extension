@@ -3,6 +3,7 @@ import {
 	firstWordDouble,
 	fullDoublePhrase,
 	popupText,
+	sillyMode,
 } from '/dictionary.js';
 
 function inlineRemover(word) {
@@ -88,17 +89,20 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 }
 
 // Get the word out of the dictionary & adjust the format to match the original word (caps & punctuation)
-function translate(word, wordToTest) {
+function translate(word, wordToTest, mode) {
 	// extract the UKEN word from the dictionary
-	let translatedWord = dictionary[wordToTest];
-
+	let translatedWord;
+	if (mode === 'serious') translatedWord = dictionary[wordToTest];
+	if (mode === 'silly') translatedWord = sillyMode[wordToTest];
+	// console.log('translated word step 1: ', translatedWord);
 	// make sure the translated word has the same capitalization as the
 	translatedWord = matchCase(inlineRemover(word), translatedWord);
-
+	// console.log('translated word step 2: ', translatedWord);
 	// add any punctuation before/after & plurals back in
 	translatedWord = rebuildTranslatedWord(word, translatedWord);
-
+	// console.log('translated word step 3: ', translatedWord);
 	//add back in any inline tags before returning the word
+	// console.log('translatedWord: ', translatedWord);
 	return inlineAdder(word, translatedWord);
 }
 
@@ -153,7 +157,7 @@ function conversions(num, nextWord, nextNextWord) {
 	if (!nextWord || !nextNextWord) return null;
 
 	let checkNextWord = simplifyBefore(nextWord);
-	console.log('checkNextWord: ', checkNextWord);
+	// console.log('checkNextWord: ', checkNextWord);
 	let checkNextNextWord = simplifyBefore(nextNextWord);
 	let popupCopy;
 	let returnText = undefined;
@@ -204,10 +208,12 @@ function findWordsToTranslate(elements) {
 			.map((word, idx, arr) => {
 				// if a two/three word phrase has been found previously, reset 'skipWord' and return an empty string
 				if (skipTwoWords) {
+					// console.log('skipping two');
 					skipTwoWords = false;
 					return '';
 				}
 				if (skipWord) {
+					// console.log('skipping one');
 					skipWord = false;
 					return '';
 				}
@@ -215,7 +221,6 @@ function findWordsToTranslate(elements) {
 				// clean up the word before testing
 				let wordToTest = simplifyBefore(word);
 				if (!isNaN(parseInt(wordToTest))) {
-					// console.log('word: ', word);
 					// console.log('arr[idx]: ', arr[idx]);
 					// console.log('arr[idx + 1]: ', arr[idx + 1]);
 					// console.log('arr[idx + 2]: ', arr[idx + 2]);
@@ -224,6 +229,7 @@ function findWordsToTranslate(elements) {
 				}
 				// check if this is part of a two word phrase
 				if (firstWordDouble[wordToTest]) {
+					console.log('phrase word match');
 					let twoWordPhrase = translateTwoWordPhrase(
 						word,
 						wordToTest,
@@ -236,7 +242,8 @@ function findWordsToTranslate(elements) {
 				}
 				// check if this this word alone is a match for translation
 				if (dictionary[wordToTest]) {
-					return translate(word, wordToTest);
+					// console.log('we got a match!!!!');
+					return translate(word, wordToTest, 'serious');
 				} else {
 					// if there have been no matches, the word does not need translating and can be returned as is
 					return word;
@@ -260,7 +267,26 @@ const tagNames = [
 	'li',
 	'a',
 	'td',
+	'div',
 ];
+
+function britishTakeover(elements) {
+	for (let i = 0; i < elements.length; i++) {
+		elements[i].innerHTML = elements[i].innerHTML
+			.split(' ')
+			.map((word) => {
+				let wordToTest = simplifyBefore(word);
+				if (sillyMode[wordToTest]) {
+					console.log('we got a match!!!!');
+					return translate(word, wordToTest, 'silly');
+				} else {
+					return word;
+				}
+			})
+			.join(' ');
+	}
+	return elements;
+}
 
 // code that activates on Extension button clicks and runs the 'find words to translate' function
 window.addEventListener('message', (event) => {
@@ -270,5 +296,29 @@ window.addEventListener('message', (event) => {
 		);
 	} else if (event.data === 'silly') {
 		console.log('TAKEOVER TIME!');
+		tagNames.forEach((tag) => {
+			findWordsToTranslate(document.getElementsByTagName(tag));
+			britishTakeover(document.getElementsByTagName(tag));
+		});
+		let children = document.body.children;
+		for (let i = 0; i < children.length; i++) {
+			let child = children[i];
+			child.style.backgroundImage =
+				'url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/United_Kingdom_Flag_Background.svg/1280px-United_Kingdom_Flag_Background.svg.png")';
+		}
+		let sections = document.getElementsByTagName('section');
+		if (sections) {
+			for (let k = 0; k < sections.length; k++) {
+				let section = sections[k];
+				section.style.backgroundImage =
+					'url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/United_Kingdom_Flag_Background.svg/1280px-United_Kingdom_Flag_Background.svg.png")';
+			}
+		}
+		let images = document.getElementsByTagName('img');
+		for (let j = 0; j < images.length; j++) {
+			let image = images[j];
+			image.src =
+				'https://i.insider.com/5c2d28b501c0ea199b74b602?width=1100&format=jpeg&auto=webp';
+		}
 	}
 });
