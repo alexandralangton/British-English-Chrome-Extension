@@ -269,6 +269,21 @@ export const popupText = {
 	<br>350°F = 180°C
 	<br>400°F = 200°C
 	<br>450°F = 230°C`,
+	hotWeatherF: `Sample warm weather conversions from Fahrenheit to Celcius:
+	<br>80°F = 27°C
+	<br>90°F = 32°C
+	<br>100°F = 38°C
+	<br>110°F = 43°C`,
+	midWeatherF: `Sample mid-range weather conversions from Fahrenheit to Celcius:
+	<br>40°F = 4°C
+	<br>50°F = 10°C
+	<br>60°F = 16°C
+	<br>70°F = 21°C`,
+	coldWeatherF: `Sample cold weather conversions from Fahrenheit to Celcius:
+	<br>32°F = 0°C
+	<br>20°F = -7°C
+	<br>10°F = -12°C
+	<br>0°F = -18°C`,
 };
 
 // weird cases

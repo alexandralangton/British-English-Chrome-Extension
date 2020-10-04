@@ -64,7 +64,7 @@ function inlineAdder(word, translatedWord) {
 		let startIdx = word.indexOf('<');
 		endInline = word.slice(startIdx);
 	}
-	console.log(frontInline + translatedWord + endInline);
+	// console.log(frontInline + translatedWord + endInline);
 	return frontInline + translatedWord + endInline;
 }
 
@@ -84,7 +84,7 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 	if (word.endsWith('zed') || twoToOnePlural === 'zed') {
 		translatedWord = translatedWord + 'd';
 	}
-	return translatedWord.trim();
+	return translatedWord;
 }
 
 // Get the word out of the dictionary & adjust the format to match the original word (caps & punctuation)
@@ -154,7 +154,8 @@ export function conversions(num, nextWord, nextNextWord) {
 
 	let checkNextWord = simplifyBefore(nextWord).toLowerCase();
 	let checkNextNextWord = simplifyBefore(nextNextWord).toLowerCase();
-
+	let popupCopy;
+	let returnText;
 	if (
 		checkNextWord === 'f' ||
 		(checkNextWord === 'degree' && checkNextNextWord === 'fahrenheit') ||
@@ -163,16 +164,26 @@ export function conversions(num, nextWord, nextNextWord) {
 		console.log('DING DING DING');
 		if (checkNextNextWord === 'f' || checkNextNextWord === 'fahrenheit') {
 			skipTwo = true;
+			returnText = `${num} ${nextWord} ${nextNextWord}`;
+		} else {
+			returnText = `${num} ${nextWord}`;
+		}
+		if (Number(num) > 200) {
+			popupCopy = popupText.cookingF;
+		} else if (Number(num) >= 80) {
+			popupCopy = popupText.hotWeatherF;
+		} else if (Number(num) >= 40) {
+			popupCopy = popupText.midWeatherF;
+		} else {
+			popupCopy = popupText.coldWeatherF;
 		}
 		skipWord = true;
 		++popupIdNo;
 		return `<div class="popup" onclick="let popup = document.getElementById('myPopup${
 			popupIdNo - 1
 		}');
-        popup.classList.toggle('show');"> ${num} ${nextWord} ${nextNextWord}
-        <span class="popuptext" id="myPopup${popupIdNo - 1}">${
-			popupText.cookingF
-		}</span>
+        popup.classList.toggle('show');"> ${returnText}
+        <span class="popuptext" id="myPopup${popupIdNo - 1}">${popupCopy}</span>
       </div>`;
 	}
 }
