@@ -1,3 +1,5 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable complexity */
 import {
 	dictionary,
 	firstWordDouble,
@@ -90,19 +92,18 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 
 // Get the word out of the dictionary & adjust the format to match the original word (caps & punctuation)
 function translate(word, wordToTest, mode) {
-	// extract the UKEN word from the dictionary
 	let translatedWord;
+	// extract the UKEN word from the dictionary
 	if (mode === 'serious') translatedWord = dictionary[wordToTest];
 	if (mode === 'silly') translatedWord = sillyMode[wordToTest];
-	// console.log('translated word step 1: ', translatedWord);
-	// make sure the translated word has the same capitalization as the
+
+	// make sure the translated word has the same capitalization as the original
 	translatedWord = matchCase(inlineRemover(word), translatedWord);
-	// console.log('translated word step 2: ', translatedWord);
+
 	// add any punctuation before/after & plurals back in
 	translatedWord = rebuildTranslatedWord(word, translatedWord);
-	// console.log('translated word step 3: ', translatedWord);
+
 	//add back in any inline tags before returning the word
-	// console.log('translatedWord: ', translatedWord);
 	return inlineAdder(word, translatedWord);
 }
 
@@ -157,7 +158,6 @@ function conversions(num, nextWord, nextNextWord) {
 	if (!nextWord || !nextNextWord) return null;
 
 	let checkNextWord = simplifyBefore(nextWord);
-	// console.log('checkNextWord: ', checkNextWord);
 	let checkNextNextWord = simplifyBefore(nextNextWord);
 	let popupCopy;
 	let returnText = undefined;
@@ -166,7 +166,6 @@ function conversions(num, nextWord, nextNextWord) {
 		(checkNextWord === 'degree' && checkNextNextWord === 'fahrenheit') ||
 		(checkNextWord === 'degree' && checkNextNextWord === 'f')
 	) {
-		console.log('DING DING DING');
 		if (checkNextNextWord === 'f' || checkNextNextWord === 'fahrenheit') {
 			returnText = `${num} ${nextWord} ${nextNextWord}`;
 			skipTwoWords = true;
@@ -208,28 +207,22 @@ function findWordsToTranslate(elements) {
 			.map((word, idx, arr) => {
 				// if a two/three word phrase has been found previously, reset 'skipWord' and return an empty string
 				if (skipTwoWords) {
-					// console.log('skipping two');
 					skipTwoWords = false;
 					return '';
 				}
 				if (skipWord) {
-					// console.log('skipping one');
 					skipWord = false;
 					return '';
 				}
-				// check for potential conversions / pop ups
 				// clean up the word before testing
 				let wordToTest = simplifyBefore(word);
-				if (!isNaN(parseInt(wordToTest))) {
-					// console.log('arr[idx]: ', arr[idx]);
-					// console.log('arr[idx + 1]: ', arr[idx + 1]);
-					// console.log('arr[idx + 2]: ', arr[idx + 2]);
+				// check for potential conversions / pop ups
+				if (!isNaN(parseInt(wordToTest, 10))) {
 					let popup = conversions(word, arr[idx + 1], arr[idx + 2]);
 					if (popup) return popup;
 				}
 				// check if this is part of a two word phrase
 				if (firstWordDouble[wordToTest]) {
-					console.log('phrase word match');
 					let twoWordPhrase = translateTwoWordPhrase(
 						word,
 						wordToTest,
@@ -242,7 +235,6 @@ function findWordsToTranslate(elements) {
 				}
 				// check if this this word alone is a match for translation
 				if (dictionary[wordToTest]) {
-					// console.log('we got a match!!!!');
 					return translate(word, wordToTest, 'serious');
 				} else {
 					// if there have been no matches, the word does not need translating and can be returned as is
@@ -277,7 +269,6 @@ function britishTakeover(elements) {
 			.map((word) => {
 				let wordToTest = simplifyBefore(word);
 				if (sillyMode[wordToTest]) {
-					console.log('we got a match!!!!');
 					return translate(word, wordToTest, 'silly');
 				} else {
 					return word;
