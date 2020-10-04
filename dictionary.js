@@ -21,6 +21,7 @@ export const dictionary = {
 	popsicle: 'ice lolly',
 	fava: 'broad',
 	frosting: 'icing',
+	donut: 'doughnut',
 	skillet: 'frying pan',
 	'whole-wheat': 'wholemeal',
 	broil: 'grill',
@@ -284,6 +285,7 @@ export const popupText = {
 	<br>20°F = -7°C
 	<br>10°F = -12°C
 	<br>0°F = -18°C`,
+	cupText: `One cup is approximately 240ml. As cups are volume-based measurements, they cannot be converted to grams. For example, a cup of flour is approximately 140g, whereas a cup of sugar is approximately 200g.`,
 };
 
 // weird cases

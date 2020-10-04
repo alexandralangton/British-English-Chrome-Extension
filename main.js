@@ -64,7 +64,7 @@ function inlineAdder(word, translatedWord) {
 		let startIdx = word.indexOf('<');
 		endInline = word.slice(startIdx);
 	}
-	// console.log(frontInline + translatedWord + endInline);
+	console.log(frontInline + translatedWord + endInline);
 	return frontInline + translatedWord + endInline;
 }
 
@@ -102,8 +102,8 @@ function translate(word, wordToTest) {
 	return inlineAdder(word, translatedWord);
 }
 
-let skipWord = false;
-let skipTwo = false;
+let skipWord = 0;
+let skipTwoWords = false;
 
 function translateTwoWordPhrase(wordOne, editedWordOne, wordTwo) {
 	if (!wordTwo) return null;
@@ -149,13 +149,14 @@ function translateTwoWordPhrase(wordOne, editedWordOne, wordTwo) {
 
 let popupIdNo = 1;
 
-export function conversions(num, nextWord, nextNextWord) {
+function conversions(num, nextWord, nextNextWord) {
 	if (!nextWord || !nextNextWord) return null;
 
-	let checkNextWord = simplifyBefore(nextWord).toLowerCase();
-	let checkNextNextWord = simplifyBefore(nextNextWord).toLowerCase();
+	let checkNextWord = simplifyBefore(nextWord);
+	console.log('checkNextWord: ', checkNextWord);
+	let checkNextNextWord = simplifyBefore(nextNextWord);
 	let popupCopy;
-	let returnText;
+	let returnText = undefined;
 	if (
 		checkNextWord === 'f' ||
 		(checkNextWord === 'degree' && checkNextNextWord === 'fahrenheit') ||
@@ -163,8 +164,8 @@ export function conversions(num, nextWord, nextNextWord) {
 	) {
 		console.log('DING DING DING');
 		if (checkNextNextWord === 'f' || checkNextNextWord === 'fahrenheit') {
-			skipTwo = true;
 			returnText = `${num} ${nextWord} ${nextNextWord}`;
+			skipTwoWords = true;
 		} else {
 			returnText = `${num} ${nextWord}`;
 		}
@@ -177,26 +178,33 @@ export function conversions(num, nextWord, nextNextWord) {
 		} else {
 			popupCopy = popupText.coldWeatherF;
 		}
-		skipWord = true;
+	} else if (checkNextWord === 'cup') {
+		returnText = `${num} ${nextWord}`;
+		popupCopy = popupText.cupText;
+	}
+	if (returnText) {
 		++popupIdNo;
+		skipWord = true;
 		return `<div class="popup" onclick="let popup = document.getElementById('myPopup${
 			popupIdNo - 1
 		}');
         popup.classList.toggle('show');"> ${returnText}
         <span class="popuptext" id="myPopup${popupIdNo - 1}">${popupCopy}</span>
       </div>`;
+	} else {
+		return null;
 	}
 }
 
 // Check all of a particular tag type's innerText for words to translate and replace them if needed
-export function findWordsToTranslate(elements) {
+function findWordsToTranslate(elements) {
 	for (let i = 0; i < elements.length; i++) {
 		elements[i].innerHTML = elements[i].innerHTML
 			.split(' ')
 			.map((word, idx, arr) => {
 				// if a two/three word phrase has been found previously, reset 'skipWord' and return an empty string
-				if (skipTwo) {
-					skipTwo = false;
+				if (skipTwoWords) {
+					skipTwoWords = false;
 					return '';
 				}
 				if (skipWord) {
@@ -230,7 +238,7 @@ export function findWordsToTranslate(elements) {
 				if (dictionary[wordToTest]) {
 					return translate(word, wordToTest);
 				} else {
-					// if there are no matches prior to this, the word does not need translating and can be returned as is
+					// if there have been no matches, the word does not need translating and can be returned as is
 					return word;
 				}
 			})
