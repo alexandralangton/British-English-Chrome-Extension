@@ -1,7 +1,7 @@
 console.log('background is running');
 
 chrome.browserAction.onClicked.addListener((tab) => {
-	// previously in options
+	// previously in options file
 	// chrome.storage.sync.set({ mode: 'silly' })
 	// chrome.storage.sync.get('mode', (data) => {
 	// 	let msg = {
