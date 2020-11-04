@@ -1,6 +1,6 @@
 {
     "name": "British English Translator",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "manifest_version": 2,
     "description": "Translate websites from American to British English",
     "permissions": ["storage", "http://*/*", "https://*/*/"],
@@ -19,7 +19,6 @@
       "main.js",
       "dictionary.js"
     ],
-    "options_page": "options/options.html",
     "browser_action": {
       "default_title": "Translates websites from American to British English",
       "default_icon": {

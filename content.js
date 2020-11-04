@@ -7,10 +7,9 @@ const head =
 	document.documentElement;
 head.insertBefore(script, head.lastChild);
 
-chrome.runtime.onMessage.addListener((msg, sender, sendRes) => {
-	if (msg.txt === 'serious') {
-		window.postMessage('serious');
-	} else if (msg.txt === 'silly') {
-		window.postMessage('silly');
+chrome.runtime.onMessage.addListener((msg) => {
+	// when adding back in second option, this needs to be msg.txt
+	if (msg === 'lion') {
+		window.postMessage('lion');
 	}
 });

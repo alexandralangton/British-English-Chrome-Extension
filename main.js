@@ -5,7 +5,6 @@ import {
 	firstWordDouble,
 	fullDoublePhrase,
 	popupText,
-	sillyMode,
 } from '/dictionary.js';
 
 function inlineRemover(word) {
@@ -91,11 +90,10 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 }
 
 // Get the word out of the dictionary & adjust the format to match the original word (caps & punctuation)
-function translate(word, wordToTest, mode) {
+function translate(word, wordToTest) {
 	let translatedWord;
 	// extract the UKEN word from the dictionary
-	if (mode === 'serious') translatedWord = dictionary[wordToTest];
-	if (mode === 'silly') translatedWord = sillyMode[wordToTest];
+	translatedWord = dictionary[wordToTest];
 
 	// make sure the translated word has the same capitalization as the original
 	translatedWord = matchCase(inlineRemover(word), translatedWord);
@@ -199,12 +197,17 @@ function conversions(num, nextWord, nextNextWord) {
 	}
 }
 
+let elementNo = 0;
+let wordCount = 0;
+
 // Check all of a particular tag type's innerText for words to translate and replace them if needed
 function findWordsToTranslate(elements) {
 	for (let i = 0; i < elements.length; i++) {
+		++elementNo;
 		elements[i].innerHTML = elements[i].innerHTML
 			.split(' ')
 			.map((word, idx, arr) => {
+				++wordCount;
 				// if a two/three word phrase has been found previously, reset 'skipWord' and return an empty string
 				if (skipTwoWords) {
 					skipTwoWords = false;
@@ -235,7 +238,7 @@ function findWordsToTranslate(elements) {
 				}
 				// check if this this word alone is a match for translation
 				if (dictionary[wordToTest]) {
-					return translate(word, wordToTest, 'serious');
+					return translate(word, wordToTest);
 				} else {
 					// if there have been no matches, the word does not need translating and can be returned as is
 					return word;
@@ -259,57 +262,17 @@ const tagNames = [
 	'li',
 	'a',
 	'td',
-	'div',
 ];
-
-function britishTakeover(elements) {
-	for (let i = 0; i < elements.length; i++) {
-		elements[i].innerHTML = elements[i].innerHTML
-			.split(' ')
-			.map((word) => {
-				let wordToTest = simplifyBefore(word);
-				if (sillyMode[wordToTest]) {
-					return translate(word, wordToTest, 'silly');
-				} else {
-					return word;
-				}
-			})
-			.join(' ');
-	}
-	return elements;
-}
 
 // code that activates on Extension button clicks and runs the 'find words to translate' function
 window.addEventListener('message', (event) => {
-	if (event.data === 'serious') {
+	const startTime = new Date();
+	if (event.data === 'lion') {
 		tagNames.forEach((tag) =>
 			findWordsToTranslate(document.getElementsByTagName(tag))
 		);
-	} else if (event.data === 'silly') {
-		console.log('TAKEOVER TIME!');
-		tagNames.forEach((tag) => {
-			findWordsToTranslate(document.getElementsByTagName(tag));
-			britishTakeover(document.getElementsByTagName(tag));
-		});
-		let children = document.body.children;
-		for (let i = 0; i < children.length; i++) {
-			let child = children[i];
-			child.style.backgroundImage =
-				'url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/United_Kingdom_Flag_Background.svg/1280px-United_Kingdom_Flag_Background.svg.png")';
-		}
-		let sections = document.getElementsByTagName('section');
-		if (sections) {
-			for (let k = 0; k < sections.length; k++) {
-				let section = sections[k];
-				section.style.backgroundImage =
-					'url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/United_Kingdom_Flag_Background.svg/1280px-United_Kingdom_Flag_Background.svg.png")';
-			}
-		}
-		let images = document.getElementsByTagName('img');
-		for (let j = 0; j < images.length; j++) {
-			let image = images[j];
-			image.src =
-				'https://i.insider.com/5c2d28b501c0ea199b74b602?width=1100&format=jpeg&auto=webp';
-		}
+		console.log('Number of Words Parsed: ', wordCount);
+		console.log('Number of Elements Parsed: ', elementNo);
+		console.log('Run Time: ', new Date() - startTime);
 	}
 });
