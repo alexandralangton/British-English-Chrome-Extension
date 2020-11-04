@@ -1,4 +1,4 @@
-## UKEN-Chrome-Extension
+## UK English Chrome Extension
 A Google Chrome extension that translates websites from American to British English, replacing words and phrases directly and adding conversion pop-ups for measurements.
 
 ## Installation
@@ -11,3 +11,5 @@ A Google Chrome extension that translates websites from American to British Engl
 The extension will have been added to your Chrome Extensions in the browser. Navigate to any website and click on the extension to try it out!
 The about of words parsed and replaced will be shown in Chrome Console.
 
+## Get in touch
+Feedback? Queries? Found a word missing from the dictionary? Let me know!
