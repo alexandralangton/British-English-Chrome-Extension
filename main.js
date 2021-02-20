@@ -24,11 +24,16 @@ function simplifyBefore(word) {
 	if ('.,"\'{[(#>'.includes(word[0])) {
 		word = word.slice(1);
 	}
-	if (word.endsWith('s')) {
+	if (word.endsWith('s') && !word.endsWith('ss') && word !== 'gas') {
 		word = word.slice(0, -1);
 	}
 	if (word.endsWith('zed')) {
 		word = word.slice(0, -1);
+	}
+	if (word.endsWith('lled')) {
+		word = word.slice(0, -2);
+	} else if (word.endsWith('llment')) {
+		word = word.slice(0, -4);
 	}
 	return word;
 }
@@ -85,6 +90,11 @@ function rebuildTranslatedWord(word, translatedWord, twoToOnePlural) {
 	}
 	if (word.endsWith('zed') || twoToOnePlural === 'zed') {
 		translatedWord = translatedWord + 'd';
+	}
+	if (word.endsWith('lled')) {
+		translatedWord = translatedWord + 'ed';
+	} else if (word.endsWith('llment')) {
+		translatedWord = translatedWord + 'ment';
 	}
 	return translatedWord;
 }
