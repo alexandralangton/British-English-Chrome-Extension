@@ -5,6 +5,7 @@ import {
 	firstWordDouble,
 	fullDoublePhrase,
 	popupText,
+	months,
 } from '/dictionary.js';
 
 function inlineRemover(word) {
@@ -111,7 +112,7 @@ function translate(word, wordToTest) {
 	// add any punctuation before/after & plurals back in
 	translatedWord = rebuildTranslatedWord(word, translatedWord);
 
-	//add back in any inline tags before returning the word
+	// add back in any inline tags before returning the word
 	return inlineAdder(word, translatedWord);
 }
 
@@ -207,6 +208,63 @@ function conversions(num, nextWord, nextNextWord) {
 	}
 }
 
+function swap(arr, idxOne, idxTwo) {
+	let temp = arr[idxOne];
+	arr[idxOne] = arr[idxTwo];
+	arr[idxTwo] = temp;
+	return arr;
+}
+
+// eslint-disable-next-line max-statements
+function replaceDates(input) {
+	let datesArr = nlp(input.replace(/<.+>/, '')).dates().out('array');
+	if (datesArr.length) {
+		// console.log('raw input: ', input);
+		let date = datesArr[0].split(' ');
+		let testMonth = simplifyBefore(date[0]);
+		// console.log('split date Arr: ', date);
+		if (date.length === 1) {
+			if (months[testMonth]) return;
+			let splitChar;
+			if (date[0].match(/\d{1,2}\/\d{1,2}\/\d{2,4}/)) {
+				splitChar = '/';
+			} else if (date[0].match(/\d{1,2}\.\d{1,2}\.\d{2,4}/)) {
+				splitChar = '.';
+			} else if (date[0].match(/\d{1,2}-\d{1,2}-\d{2,4}/)) {
+				splitChar = '-';
+			}
+			if (splitChar) {
+				console.log('original text to swap: ', input);
+				console.log('date: ', date);
+				let toSwitch = swap(date[0].split(splitChar), 0, 1);
+				console.log('this should be updated: ', toSwitch.join(splitChar));
+				return toSwitch.join(splitChar);
+			}
+		} else {
+			// console.log('date before: ', date);
+			if (!months[testMonth]) {
+				// console.log('this one failed the test: ', testMonth);
+				return;
+			} else if (date.length === 2) {
+				if (date[1].match(/\d{4}/)) return;
+			}
+			let simpleDay = simplifyBefore(date[1]);
+			let newMonth = rebuildTranslatedWord(date[1], testMonth);
+			newMonth = newMonth[0].toUpperCase() + newMonth.slice(1);
+			let newDay = rebuildTranslatedWord(date[0], simpleDay);
+			date[0] = inlineAdder(date[0], newDay);
+			date[1] = inlineAdder(date[1], newMonth);
+			// console.log('date after swap: ', date);
+			if (date.length > 2) {
+				skipTwoWords = true;
+			}
+			skipWord = true;
+			console.log('lets see you then: ', date.join(' '));
+			return date.join(' ');
+		}
+	}
+}
+
 let elementNo = 0;
 let wordCount = 0;
 
@@ -229,6 +287,11 @@ function findWordsToTranslate(elements) {
 				}
 				// clean up the word before testing
 				let wordToTest = simplifyBefore(word);
+				// check for dates to convert
+				if (!isNaN(parseInt(wordToTest, 10)) || months[wordToTest]) {
+					let date = replaceDates(`${word} ${arr[idx + 1]} ${arr[idx + 2]}`);
+					if (date) return date;
+				}
 				// check for potential conversions / pop ups
 				if (!isNaN(parseInt(wordToTest, 10))) {
 					let popup = conversions(word, arr[idx + 1], arr[idx + 2]);
@@ -278,6 +341,8 @@ const tagNames = [
 window.addEventListener('message', (event) => {
 	const startTime = new Date();
 	if (event.data === 'lion') {
+		nlp.extend(compromiseNumbers);
+		nlp.extend(compromiseDates);
 		tagNames.forEach((tag) =>
 			findWordsToTranslate(document.getElementsByTagName(tag))
 		);
