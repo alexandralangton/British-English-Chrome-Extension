@@ -73,7 +73,7 @@ function inlineAdder(word, translatedWord) {
 		let startIdx = word.indexOf('<');
 		endInline = word.slice(startIdx);
 	}
-	console.log(frontInline + translatedWord + endInline);
+	// console.log(frontInline + translatedWord + endInline);
 	return frontInline + translatedWord + endInline;
 }
 
@@ -235,10 +235,10 @@ export function replaceDates(input, nlp) {
 				splitChar = '-';
 			}
 			if (splitChar) {
-				console.log('original text to swap: ', input);
+				// console.log('original text to swap: ', input);
 				console.log('date: ', date);
 				let toSwitch = swap(date[0].split(splitChar), 0, 1);
-				console.log('this should be updated: ', toSwitch.join(splitChar));
+				// console.log('this should be updated: ', toSwitch.join(splitChar));
 				return toSwitch.join(splitChar);
 			}
 		} else {
@@ -260,7 +260,7 @@ export function replaceDates(input, nlp) {
 				skipTwoWords = true;
 			}
 			skipWord = true;
-			console.log('lets see you then: ', date.join(' '));
+			// console.log('lets see you then: ', date.join(' '));
 			return date.join(' ');
 		}
 	}
