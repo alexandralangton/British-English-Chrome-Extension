@@ -9,4 +9,4 @@ A Google Chrome extension that translates websites from American to British Engl
 * Click on 'Load unpacked' and select the cloned directory
 
 The extension will have been added to your Chrome Extensions in the browser. Navigate to any website and click on the extension to try it out!
-The amout of words parsed and replaced will be shown in the Chrome Console.
+The number of words parsed and replaced will be shown in Chrome Console.
