@@ -1,12 +1,13 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable complexity */
+
 import {
 	dictionary,
 	firstWordDouble,
 	fullDoublePhrase,
 	popupText,
 	months,
-} from '/dictionary.js';
+} from './dictionary.js';
 
 function inlineRemover(word) {
 	word = word.replace(/<\w+>/g, '');
@@ -216,7 +217,7 @@ function swap(arr, idxOne, idxTwo) {
 }
 
 // eslint-disable-next-line max-statements
-function replaceDates(input) {
+export function replaceDates(input, nlp) {
 	let datesArr = nlp(input.replace(/<.+>/, '')).dates().out('array');
 	if (datesArr.length) {
 		// console.log('raw input: ', input);
@@ -289,7 +290,10 @@ function findWordsToTranslate(elements) {
 				let wordToTest = simplifyBefore(word);
 				// check for dates to convert
 				if (!isNaN(parseInt(wordToTest, 10)) || months[wordToTest]) {
-					let date = replaceDates(`${word} ${arr[idx + 1]} ${arr[idx + 2]}`);
+					let date = replaceDates(
+						`${word} ${arr[idx + 1]} ${arr[idx + 2]}`,
+						nlp
+					);
 					if (date) return date;
 				}
 				// check for potential conversions / pop ups
