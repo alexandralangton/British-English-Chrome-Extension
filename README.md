@@ -10,3 +10,6 @@ A Google Chrome extension that translates websites from American to British Engl
 
 The extension will have been added to your Chrome Extensions in the browser. Navigate to any website and click on the extension to try it out!
 The number of words parsed and replaced will be shown in Chrome Console.
+
+## Note
+I'm currently working on producing a version of this Chrome Extension using the latest Chrome Extension Manifesto version, writing unit tests to identify areas of improvement. You can see my progress on this in [this repo](https://github.com/alexandralangton/UK-EN-Translating-Chrome-Extension).
